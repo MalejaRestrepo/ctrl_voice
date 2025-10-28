@@ -8,7 +8,7 @@ import time
 import paho.mqtt.client as paho
 import json
 from gtts import gTTS
-from googletrans import Translator
+from deep_translator import GoogleTranslator  # ✅ reemplazo moderno compatible
 
 # --- Estilo general con tonos fríos ---
 st.markdown("""
@@ -144,10 +144,21 @@ result = streamlit_bokeh_events(
 # --- Procesamiento de la voz capturada ---
 if result:
     if "GET_TEXT" in result:
-        st.markdown("<div class='msg-box'>Comando detectado: <b>" + result.get("GET_TEXT") + "</b></div>", unsafe_allow_html=True)
+        # Texto detectado
+        texto_detectado = result.get("GET_TEXT")
+        st.markdown(f"<div class='msg-box'>Comando detectado: <b>{texto_detectado}</b></div>", unsafe_allow_html=True)
+        
+        # ✅ Traducción automática con deep-translator
+        try:
+            texto_traducido = GoogleTranslator(source='auto', target='es').translate(texto_detectado)
+            st.markdown(f"<div class='msg-box'>Traducción al español: <b>{texto_traducido}</b></div>", unsafe_allow_html=True)
+        except Exception as e:
+            st.error(f"Error al traducir el texto: {e}")
+
+        # MQTT publicación
         client1.on_publish = on_publish
         client1.connect(broker, port)
-        message = json.dumps({"Act1": result.get("GET_TEXT").strip()})
+        message = json.dumps({"Act1": texto_detectado.strip()})
         ret = client1.publish("voice_ctrl", message)
 
     try:
