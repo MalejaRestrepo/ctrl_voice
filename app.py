@@ -20,13 +20,21 @@ st.markdown("""
             color: #263238;
         }
 
-        /* Títulos principales */
-        h1, h2, h3 {
-            background: linear-gradient(90deg, #4b6cb7, #6a85b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Título principal */
+        h1 {
+            color: #5c6bc0; /* Azul lavanda sólido */
             text-align: center;
-            font-weight: 700;
+            font-weight: 800;
+            font-size: 2.4em;
+            text-shadow: 0px 2px 6px rgba(92, 107, 192, 0.25);
+            margin-bottom: 0.3em;
+        }
+
+        /* Subtítulo */
+        h2, h3 {
+            color: #6a7bd1; /* Lila azulado */
+            text-align: center;
+            font-weight: 600;
         }
 
         /* Header superior */
@@ -61,8 +69,8 @@ st.markdown("""
             display: block;
             margin-left: auto;
             margin-right: auto;
-            border-radius: 12px;
-            box-shadow: 0px 4px 12px rgba(100, 130, 200, 0.3);
+            border-radius: 15px;
+            box-shadow: 0px 6px 14px rgba(100, 130, 200, 0.25);
         }
 
         /* Cuadro de mensajes */
@@ -84,6 +92,7 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
+
 
 # --- Configuración MQTT ---
 def on_publish(client, userdata, result):
