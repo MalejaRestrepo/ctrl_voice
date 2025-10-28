@@ -105,7 +105,8 @@ client1.on_message = on_message
 st.title("INTERFACES MULTIMODALES")
 st.subheader("Control por Voz")
 
-image = Image.open('voice_ctrl.jpg')
+# ✅ Nueva imagen
+image = Image.open('cinnaa.jpeg')
 st.image(image, width=200)
 
 st.markdown("<p class='hint'>Toca el botón y habla</p>", unsafe_allow_html=True)
